@@ -12,12 +12,10 @@
         android:layout_height="wrap_content"
         android:text="Song ID" />
 
-    <EditText
-        android:id="@+id/etId"
+    <TextView
+        android:id="@+id/tvId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/textView8"
