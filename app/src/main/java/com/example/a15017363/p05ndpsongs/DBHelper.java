@@ -66,7 +66,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public ArrayList<Song> getAllSongs(String keyword) {
+    public ArrayList<Song> getAllSongs() {
         ArrayList<Song> songs = new ArrayList<Song>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -124,7 +124,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public ArrayList<String> getYears(){
         ArrayList<String> codes = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_YEAR};
+        Cursor cursor = db.query(true, TABLE_SONGS, columns, null, null,
+                null, null, null, null);
 
+        if (cursor.moveToFirst()) {
+            do {
+                String code = cursor.getString(0);
+                codes.add(code);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
 
         return codes;
     }
