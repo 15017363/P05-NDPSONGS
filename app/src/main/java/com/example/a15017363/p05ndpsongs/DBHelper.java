@@ -134,7 +134,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns= {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGERS, COLUMN_YEAR, COLUMN_STARS};
-        String condition = COLUMN_YEAR + "=";
+        String condition = COLUMN_YEAR + "= ?";
         String[] args = { yearFilter + ""};
         Cursor cursor = db.query(TABLE_SONGS, columns, condition, args,
                 null, null, null, null);
