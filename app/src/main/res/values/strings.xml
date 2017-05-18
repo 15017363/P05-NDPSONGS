@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">P05 NDP SONGS</string>
+    <string-array name="spinnerYear">
+        <item>IDR</item>
+        <item>INR</item>
+        <item>MYR</item>
+        <item>VND</item>
+        <item>CNY</item>
+        <item>PHP</item>
+    </string-array>
 </resources>
