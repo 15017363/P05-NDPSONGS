@@ -66,7 +66,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public ArrayList<Song> getAllSongs(String keyword) {
+    public ArrayList<Song> getAllSongs() {
         ArrayList<Song> songs = new ArrayList<Song>();
 
         SQLiteDatabase db = this.getReadableDatabase();
