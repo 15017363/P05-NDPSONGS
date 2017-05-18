@@ -44,10 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
                 DBHelper db = new DBHelper(MainActivity.this);
                 //Insert a task
-                db.insertSong(title,singer,year,rbstars);
-                Toast.makeText(MainActivity.this, "Song inserted; title: "+title+", singer: "+singer+", year: "+year+", stars: "+rbstars , Toast.LENGTH_SHORT).show();
+                long row_affected = db.insertSong(title,singer,year,rbstars);
                 db.close();
 
+                if(row_affected != -1 ){
+                    Toast.makeText(MainActivity.this, "Song inserted; title: "+title+", singer: "+singer+", year: "+year+", stars: "+rbstars , Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
