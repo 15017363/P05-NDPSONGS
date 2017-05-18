@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Main3Activity extends AppCompatActivity {
     EditText etTitle, etSinger, etYear;
@@ -31,11 +32,12 @@ public class Main3Activity extends AppCompatActivity {
 
         Intent i = getIntent();
         data = (Song)i.getSerializableExtra("data");
-        tvId.setText(data.get_id());
+        tvId.setText(data.get_id()+"");
         etTitle.setText(data.getTitle());
         etSinger.setText(data.getSingers());
-        etYear.setText(data.getYear());
+        etYear.setText(data.getYear()+"");
         int selected = data.getStars();
+
         if(selected == 1){
             rb1 = (RadioButton)findViewById(R.id.rb1);
             rb1.setChecked(true);
@@ -63,7 +65,7 @@ public class Main3Activity extends AppCompatActivity {
                 data.setSingers(etSinger.getText().toString());
                 data.setTitle(etTitle.getText().toString());
                 data.setStars(stars);
-                dbh.updateSong(data);
+                int x = dbh.updateSong(data);
                 dbh.close();
                 Intent i = new Intent();
                 setResult(RESULT_OK,i);
@@ -91,8 +93,5 @@ public class Main3Activity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-    }
+   }
 }
