@@ -30,7 +30,7 @@ public class Main3Activity extends AppCompatActivity {
         btnCancel = (Button)findViewById(R.id.btnCancel);
 
         Intent i = getIntent();
-        data = (Song)i.getSerializableExtra("id");
+        data = (Song)i.getSerializableExtra("data");
         tvId.setText(data.get_id());
         etTitle.setText(data.getTitle());
         etSinger.setText(data.getSingers());
@@ -55,14 +55,32 @@ public class Main3Activity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                DBHelper dbh = new DBHelper(EditActivity.this);
-//                data.setNoteContent(etContent.getText().toString());
-//                dbh.updateNote(data);
-//                dbh.close();
-//                Intent i = new Intent();
-//                setResult(RESULT_OK,i);
-//                finish();
+                DBHelper dbh = new DBHelper(Main3Activity.this);
+                RadioGroup rg = (RadioGroup)findViewById(R.id.rgStars);
+                int selected = rg.getCheckedRadioButtonId();
+                RadioButton rb = (RadioButton)findViewById(selected);
+                int stars = Integer.parseInt(rb.getText().toString());
+                data.setSingers(etSinger.getText().toString());
+                data.setTitle(etTitle.getText().toString());
+                data.setStars(stars);
+                dbh.updateSong(data);
+                dbh.close();
+                Intent i = new Intent();
+                setResult(RESULT_OK,i);
+                finish();
 
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DBHelper dbh = new DBHelper(Main3Activity.this);
+                dbh.deleteSong(data.get_id());
+                dbh.close();
+                Intent i= new Intent();
+                setResult(RESULT_OK,i);
+                finish();
             }
         });
 
