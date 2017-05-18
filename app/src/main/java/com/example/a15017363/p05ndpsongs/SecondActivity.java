@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
     Button btnShow;
-    Spinner spinnerYear;
-    ArrayAdapter spinnerAdapter;
     ListView lvSong;
     ArrayList<Song> SongList = new ArrayList<Song>();
     SongAdapter caSong = null;
@@ -24,6 +22,7 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        btnShow = (Button)findViewById(R.id.btnShow);
         lvSong = (ListView)findViewById(R.id.lvSong);
         caSong = new SongAdapter(this, R.layout.row, SongList);
         lvSong.setAdapter(caSong);
@@ -43,8 +42,34 @@ public class SecondActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), Main3Activity.class);
                 Song data = new Song(SongList.get(i).get_id(), SongList.get(i).getTitle(), SongList.get(i).getSingers(), SongList.get(i).getYear(), SongList.get(i).getStars());
                 intent.putExtra("data", data);
-                startActivityForResult(intent, 9);
+                startActivityForResult(intent, i);
+
             }
         });
+
+        btnShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SongList.clear();
+                DBHelper db = new DBHelper(SecondActivity.this);
+                ArrayList<Song> song = db.getAllSongByStars(5);
+                db.close();
+
+                for (int i = 0; i < song.size(); i++){
+                    SongList.add(new Song(song.get(i).get_id(), song.get(i).getTitle(), song.get(i).getSingers(), song.get(i).getYear(),song.get(i).getStars()));
+                }
+                caSong.notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == 9){
+            caSong.notifyDataSetChanged();
+        }
     }
 }
