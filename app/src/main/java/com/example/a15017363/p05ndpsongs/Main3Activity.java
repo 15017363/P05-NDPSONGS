@@ -83,6 +83,14 @@ public class Main3Activity extends AppCompatActivity {
                 finish();
             }
         });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent();
+                setResult(RESULT_OK,i);
+                finish();
+            }
+        });
 
 
 
