@@ -11,6 +11,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class Main3Activity extends AppCompatActivity {
     EditText etTitle, etSinger, etYear;
     TextView tvId;
@@ -64,6 +66,7 @@ public class Main3Activity extends AppCompatActivity {
                 int stars = Integer.parseInt(rb.getText().toString());
                 data.setSingers(etSinger.getText().toString());
                 data.setTitle(etTitle.getText().toString());
+                data.setYear(Integer.parseInt(etYear.getText().toString()));
                 data.setStars(stars);
                 int x = dbh.updateSong(data);
                 dbh.close();
