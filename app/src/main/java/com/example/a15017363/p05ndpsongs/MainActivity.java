@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnInsert, btnShow;
     EditText etTitle, etYear, etSinger;
     RadioGroup rgStars;
+    RadioButton radiobtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
         btnInsert = (Button)findViewById(R.id.btnInsert);
         btnShow = (Button)findViewById(R.id.btnShow);
 
-        etTitle = (EditText)findViewById(R.id.etTitle);
-        etSinger = (EditText)findViewById(R.id.etSinger);
-        etYear = (EditText)findViewById(R.id.etYear);
+        etTitle = (EditText)findViewById(R.id.editTextTitle);
+        etSinger = (EditText)findViewById(R.id.editTextSinger);
+        etYear = (EditText)findViewById(R.id.editTextYear);
 
         rgStars = (RadioGroup)findViewById(R.id.rgStars);
 
@@ -35,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 int selected = rgStars.getCheckedRadioButtonId();
-                RadioButton radiobtn = (RadioButton)findViewById(selected);
-                int rbstars = Integer.parseInt(radiobtn.getText().toString());
+                radiobtn = (RadioButton)findViewById(selected);
                 String title = etTitle.getText().toString();
                 String singer = etSinger.getText().toString();
                 int year = Integer.parseInt(etYear.getText().toString());
+                int rbstars = Integer.parseInt(radiobtn.getText().toString());
 
                 DBHelper db = new DBHelper(MainActivity.this);
                 //Insert a task
