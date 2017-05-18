@@ -1,7 +1,10 @@
 package com.example.a15017363.p05ndpsongs;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -34,5 +37,14 @@ public class SecondActivity extends AppCompatActivity {
         }
         caSong.notifyDataSetChanged();
 
+        lvSong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getBaseContext(), Main3Activity.class);
+                Song data = new Song(SongList.get(i).get_id(), SongList.get(i).getTitle(), SongList.get(i).getSingers(), SongList.get(i).getYear(), SongList.get(i).getStars());
+                intent.putExtra("data", data);
+                startActivityForResult(intent, 9);
+            }
+        });
     }
 }
